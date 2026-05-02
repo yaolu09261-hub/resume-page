@@ -40,28 +40,17 @@
       width: 128px;
       height: 160px;
       border-radius: 10px;
-      border: 1px dashed #b7c2d0;
+      border: 1px solid #d8deea;
       background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
       flex-shrink: 0;
-      position: relative;
     }
 
     .avatar-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: none;
-    }
-
-    .avatar-placeholder {
-      color: #8a94a6;
-      font-size: 14px;
-      text-align: center;
-      padding: 10px;
+      display: block;
     }
 
     .header-main {
@@ -90,17 +79,6 @@
       margin-right: 18px;
       display: inline-block;
       margin-bottom: 4px;
-    }
-
-    .upload-row {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    input[type="file"] {
-      font-size: 13px;
-      margin-top: 6px;
     }
 
     h2 {
@@ -227,7 +205,6 @@
       padding-top: 16px;
     }
 
-    /* 证书弹窗 */
     .modal {
       display: none;
       position: fixed;
@@ -259,6 +236,7 @@
         opacity: 0;
         transform: scale(0.97);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -338,7 +316,6 @@
         max-width: 100%;
       }
 
-      .upload-row,
       .view-tip {
         display: none;
       }
@@ -352,8 +329,7 @@
     <!-- 顶部个人信息 -->
     <div class="header">
       <div class="avatar-box">
-        <img id="avatarPreview" alt="个人照片预览">
-        <div class="avatar-placeholder" id="avatarText">上传个人照片</div>
+        <img src="images/avatar.jpg" alt="姚璐个人照片">
       </div>
 
       <div class="header-main">
@@ -368,11 +344,6 @@
           <span>籍贯：安徽省全椒县</span>
           <span>电话：17545546820</span>
           <span>邮箱：822766718@qq.com</span>
-        </div>
-
-        <div class="upload-row">
-          <label>上传个人照片：</label><br>
-          <input type="file" accept="image/*" onchange="previewAvatar(event)">
         </div>
       </div>
     </div>
@@ -449,7 +420,7 @@
       </ul>
     </div>
 
-    <!-- 学术成果 -->
+    <!-- 学术论文 -->
     <h2>学术论文</h2>
     <div class="card">
       <div class="paper-item">
@@ -621,26 +592,6 @@
   </div>
 
   <script>
-    // 上传头像并预览
-    function previewAvatar(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        const img = document.getElementById("avatarPreview");
-        const text = document.getElementById("avatarText");
-
-        img.src = e.target.result;
-        img.style.display = "block";
-        text.style.display = "none";
-      };
-
-      reader.readAsDataURL(file);
-    }
-
-    // 点击荣誉奖项，打开固定路径证书图片
     function openCert(title, imgPath) {
       const modal = document.getElementById("certModal");
       const certTitle = document.getElementById("certTitle");
@@ -663,12 +614,10 @@
       modal.style.display = "flex";
     }
 
-    // 关闭证书弹窗
     function closeCert() {
       document.getElementById("certModal").style.display = "none";
     }
 
-    // 点击弹窗背景关闭
     window.onclick = function(event) {
       const modal = document.getElementById("certModal");
       if (event.target === modal) {
@@ -676,7 +625,6 @@
       }
     };
 
-    // 按 Esc 关闭弹窗
     document.addEventListener("keydown", function(event) {
       if (event.key === "Escape") {
         closeCert();
